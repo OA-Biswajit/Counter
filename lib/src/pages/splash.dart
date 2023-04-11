@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:counter/src/global.dart';
 import 'package:counter/src/pages/home/home.dart';
@@ -15,7 +14,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  setCookie(response) {
+  final TextEditingController regdNo = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+setCookie(response) {
     String rawCookie = response.headers['set-cookie']!;
     int index = rawCookie.indexOf(';');
     String refreshToken =
@@ -26,11 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     String cookieID = refreshToken.substring(idx + 1).trim();
     sharedPreferences.setString('cookie', cookieID);
-
   }
 
-  final TextEditingController regdNo = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  
   tryLoggingThisUser() async {
     var response = await https.post(
         Uri.parse('http://115.240.101.71:8282/CampusPortalSOA/login'),
@@ -42,20 +42,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
     var decoded = jsonDecode(response.body);
     print(decoded);
-    if (decoded["message"].toString().contains("success")) {
-      
-       setCookie(response);
-        Navigator.of(context).pushAndRemoveUntil(
+   if (decoded["status"].toString().contains("success")) {
+      //cookie save
+      setCookie(response);
+      // ignore: use_build_context_synchronously
+      //sending to home page
+      Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomePage()),
           (route) => false);
+      sharedPreferences.setBool('isLoggedIn', true);
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(decoded["message"])));
-
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(decoded["message"])));
-
     }
   }
 
@@ -71,6 +73,9 @@ class _SplashScreenState extends State<SplashScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                    const SizedBox(
+                  height: 50,
+                ),
                   Container(
                     height: 70,
                     width: 70,
@@ -128,7 +133,8 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: ElevatedButton.styleFrom(shape: StadiumBorder()),
                     ),
                   ),
-                  const SizedBox(height: 10),
+
+                  // const SizedBox(height: 10),
                   // Row(
                   //   children: [
                   //     Expanded(
