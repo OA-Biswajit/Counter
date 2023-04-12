@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final TextEditingController regdNo = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-setCookie(response) {
+  setCookie(response) {
     String rawCookie = response.headers['set-cookie']!;
     int index = rawCookie.indexOf(';');
     String refreshToken =
@@ -30,7 +30,6 @@ setCookie(response) {
     sharedPreferences.setString('cookie', cookieID);
   }
 
-  
   tryLoggingThisUser() async {
     var response = await https.post(
         Uri.parse('http://115.240.101.71:8282/CampusPortalSOA/login'),
@@ -42,7 +41,7 @@ setCookie(response) {
 
     var decoded = jsonDecode(response.body);
     print(decoded);
-   if (decoded["status"].toString().contains("success")) {
+    if (decoded["status"].toString().contains("success")) {
       //cookie save
       setCookie(response);
       // ignore: use_build_context_synchronously
@@ -64,27 +63,32 @@ setCookie(response) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Image.asset('assets/background.png').color,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromRGBO(81, 227, 178, 0.806),
-      body: SafeArea(
+      // backgroundColor: Colors.white,
+         body:
+          SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Align(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                    const SizedBox(
-                  height: 50,
-                ),
+                  // const SizedBox(
+                  //   height: 50,
+                  // ),
                   Container(
-                    height: 70,
-                    width: 70,
+                    height: 100,
+                    width: 100,
                     decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                        // color: Colors.blue,
+                        image: DecorationImage(
+                            image: AssetImage("assets/LoginIcon.png")),
+                        // borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 1,
                   ),
                   const Text(
                     'Sign In',
@@ -103,10 +107,11 @@ setCookie(response) {
                   ),
                   TextField(
                     controller: regdNo,
-                    decoration: const InputDecoration(
+                      decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(),
                       hintText: "Enter Registraton Number",
+                      
                     ),
                   ),
                   const SizedBox(height: 10),
