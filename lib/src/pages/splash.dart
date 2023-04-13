@@ -47,9 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
       // ignore: use_build_context_synchronously
       //sending to home page
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomePage()),
-          // (route) => false
-          );
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        // (route) => false
+      );
       sharedPreferences.setBool('isLoggedIn', true);
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
@@ -64,120 +64,139 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Image.asset('assets/background.png').color,
       resizeToAvoidBottomInset: false,
-      // backgroundColor: Colors.white,
-         body:
-          SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // const SizedBox(
-                  //   height: 50,
-                  // ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: const BoxDecoration(
-                        // color: Colors.blue,
-                        image: DecorationImage(
-                            image: AssetImage("assets/LoginIcon.png")),
-                        // borderRadius: BorderRadius.all(Radius.circular(20))
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  const Text(
-                    'Sign In',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const Text(
-                    'Access your account',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 108, 51, 51),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: regdNo,
-                      decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(),
-                      hintText: "Enter Registraton Number",
+      
+      body: SafeArea(
+        child: Container(
+          
+          height:double.infinity,
+          
+                
+                decoration: BoxDecoration(
+            
+                    image: DecorationImage(
+                   
+                        image: AssetImage('assets/background.png'),fit:BoxFit.fill)),
+                        
+          child: Padding(
+            
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              
+              child: SingleChildScrollView(
+                // child: Container(
+                  
+                          
+                  child: Column(
+                    children: [
                       
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-
-                  TextField(
-                    obscureText: true,
-                    controller: password,
-                    decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(),
-                      hintText: "Enter Password",
-                    ),
-                  ),
-                   const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                        tryLoggingThisUser();
+                      
+                      // const SizedBox(
+                      //   height: 50,
+                      // ),
+                      Container(
+                       
+                        height: 100,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                          // color: Colors.blue,
+                          image: DecorationImage(
+                              image: AssetImage("assets/LoginIcon.png")),
+                          // borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 1,
+                      ),
+                      const Text(
+                        'Sign In',
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const Text(
+                        'Access your account',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 108, 51, 51),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        controller: regdNo,
+                        decoration: const InputDecoration(
+                          enabledBorder: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(),
+                          hintText: "Enter Registraton Number",
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+        
+                      TextField(
+                        obscureText: true,
+                        controller: password,
+                        decoration: const InputDecoration(
+                          enabledBorder: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(),
+                          hintText: "Enter Password",
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            tryLoggingThisUser();
                           },
-                    child: const Text("Sign In"),
+                          child: const Text("Sign In"),
+                        ),
+                      ),
+        
+                      // const SizedBox(height: 10),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: Container(
+                      //         height: 1,
+                      //         color: Colors.grey,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     const Text('sign in with'),
+                      //     const SizedBox(width: 5),
+                      //     Expanded(
+                      //       child: Container(
+                      //         height: 1,
+                      //         color: Colors.grey,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      //  const SizedBox(height: 10),
+                      //   SizedBox(
+                      //   width: double.infinity,
+                      //   child: ElevatedButton(
+                      //     onPressed: () {},
+                      //     child: const Text('Google'),
+                      //     style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                      //   ),
+                      // ),
+        
+                      //   SizedBox(
+                      //   width: double.infinity,
+                      //   child: ElevatedButton(
+                      //     onPressed: () {},
+                      //     child: const Text('Facebook'),
+                      //      style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                      //   ),
+                      // ),
+                    ],
                   ),
-                ),
-
-                  // const SizedBox(height: 10),
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: Container(
-                  //         height: 1,
-                  //         color: Colors.grey,
-                  //       ),
-                  //     ),
-                  //     const SizedBox(width: 5),
-                  //     const Text('sign in with'),
-                  //     const SizedBox(width: 5),
-                  //     Expanded(
-                  //       child: Container(
-                  //         height: 1,
-                  //         color: Colors.grey,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  //  const SizedBox(height: 10),
-                  //   SizedBox(
-                  //   width: double.infinity,
-                  //   child: ElevatedButton(
-                  //     onPressed: () {},
-                  //     child: const Text('Google'),
-                  //     style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                  //   ),
-                  // ),
-
-                  //   SizedBox(
-                  //   width: double.infinity,
-                  //   child: ElevatedButton(
-                  //     onPressed: () {},
-                  //     child: const Text('Facebook'),
-                  //      style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                  //   ),
-                  // ),
-                ],
+                // ),
               ),
             ),
           ),
