@@ -93,28 +93,30 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
+          :  SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
-                      Align(
-                        child: CircleAvatar(
-                          radius: 55,
-                          backgroundColor: Colors.blue,
-                          child: CircleAvatar(
-                            radius: 52,
-                            backgroundImage: MemoryImage(list!),
-                          ),
-                        ),
+                      list == null
+                          ? const CircularProgressIndicator()
+                          : Align(
+                              child: CircleAvatar(
+                                radius: 60,
+                                child: CircleAvatar(
+                                  backgroundImage: MemoryImage(list!),
+                                  radius: 55,
+                                ),
+                              ),
+                            ),
 
                         // ClipRRect(
                         //   borderRadius: BorderRadius.circular(40),
                         //   child: Image.memory(list!, width: 100),
                         // ),
-                      ),
+                      
                       Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         margin: const EdgeInsets.only(top: 15),

@@ -126,19 +126,18 @@ class _SplashScreenState extends State<SplashScreen> {
                       hintText: "Enter Password",
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
+                   const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
                         tryLoggingThisUser();
-                      },
-                      child: const Text('Sign In'),
-                      style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                    ),
+                          },
+                    child: const Text("Sign In"),
                   ),
+                ),
 
                   // const SizedBox(height: 10),
                   // Row(
