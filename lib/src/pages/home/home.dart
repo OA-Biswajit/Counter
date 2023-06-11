@@ -261,6 +261,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
+        
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.co_present_outlined),
@@ -272,22 +273,25 @@ class _HomePageState extends State<HomePage> {
             label: "Attendence",
           ),
         ],
-        enableFeedback: true,
-        onTap: (value) {
-          if (value == 1) {
+        
+        // enableFeedback: true,
+       
+        onTap: (value) { 
+          int _selectedIndex=0;
+          if (value == 0) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => HomePage()));
             // return;
           }
-          if (value == 2) {
+          if (value == 1) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Attendencepage()));
 
             // return;
           }
-          // setState(() {
-          // _selectedIndex = value;
-          // });
+          setState(() {
+            _selectedIndex = value;
+          });
         },
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
