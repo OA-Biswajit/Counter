@@ -1,11 +1,12 @@
 import 'dart:convert';
-
 import 'package:counter/src/global.dart';
 import 'package:counter/src/model/attendance_model.dart';
+import 'package:counter/src/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as https;
+
 class Attendencepage extends StatefulWidget {
   const Attendencepage({super.key});
 
@@ -32,7 +33,7 @@ class _AttendencepageState extends State<Attendencepage> {
   fetchAttedenceId() async {
     var response = await https.post(
       Uri.parse(
-          'http://115.240.101.71:8282/CampusPortalSOA/studentSemester/lov'),
+          'http://115.240.101.51:8282//CampusPortalSOA/studentSemester/lov'),
       headers: {
         'Cookie': 'JSESSIONID=${sharedPreferences.getString('cookie')}',
       },
@@ -44,9 +45,9 @@ class _AttendencepageState extends State<Attendencepage> {
 
   fetchAttendence(String atId) async {
     var response = await https.post(
-      Uri.parse('http://115.240.101.71:8282/CampusPortalSOA/attendanceinfo'),
+      Uri.parse('http://115.240.101.51:8282//CampusPortalSOA/attendanceinfo'),
       // body: json.encode({"registerationid": atId}),
-          body: json.encode({"registerationid":"ITERRETD2209A0000001"}),
+      body: json.encode({"registerationid": "ITERRETD2209A0000001"}),
       headers: {
         'Cookie': 'JSESSIONID=${sharedPreferences.getString('cookie')}',
       },
@@ -180,6 +181,38 @@ class _AttendencepageState extends State<Attendencepage> {
                 );
               },
             ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.co_present_outlined),
+            label: "Profile",
+          ),
+          // BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.cube), label: "Shipments"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle_outlined),
+            label: "Attendence",
+          ),
+        ],
+        enableFeedback: true,
+        onTap: (value) {
+          if (value == 1) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomePage()));
+            // return;
+          }
+          if (value == 2) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Attendencepage()));
+
+            // return;
+          }
+          // setState(() {
+          //   // _selectedIndex = value;
+          // });
+        },
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }

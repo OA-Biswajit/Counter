@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:counter/src/global.dart';
 import 'package:counter/src/model/student_model.dart';
 import 'package:counter/src/pages/attendance/attendance.dart';
-import 'package:counter/src/pages/splash.dart';
+import 'package:counter/src/pages/app_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as https;
 
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final https.Response response = await https.get(
         Uri.parse(
-            'http://115.240.101.71:8282/CampusPortalSOA/image/studentPhoto'),
+            'http://115.240.101.51:8282//CampusPortalSOA/image/studentPhoto'),
         headers: {
           'Cookie': 'JSESSIONID=${sharedPreferences.getString('cookie')}',
         },
@@ -45,12 +45,10 @@ class _HomePageState extends State<HomePage> {
 
   late Student student;
 
-  // late Student student;
-
   fetchStudentInfo() async {
-    //try {
+    // try {
     var response = await https.post(
-        Uri.parse('http://115.240.101.71:8282//CampusPortalSOA/studentinfo'),
+        Uri.parse('http://115.240.101.51:8282//CampusPortalSOA/studentinfo'),
         headers: {
           "Cookie": "JSESSIONID=${sharedPreferences.getString('cookie')}"
         });
@@ -58,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     var decoded = jsonDecode(response.body);
     if (decoded["detail"].isEmpty) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const SplashScreen()));
+          MaterialPageRoute(builder: (context) => const App_login_page()));
     } else {
       student = Student(
         name: decoded["detail"][0]["name"] ?? "Not given",
@@ -93,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          :  SafeArea(
+          : SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -112,11 +110,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(40),
-                        //   child: Image.memory(list!, width: 100),
-                        // ),
-                      
+                      // ClipRRect(
+                      //   borderRadius: BorderRadius.circular(40),
+                      //   child: Image.memory(list!, width: 100),
+                      // ),
+
                       Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         margin: const EdgeInsets.only(top: 15),
@@ -257,25 +255,43 @@ class _HomePageState extends State<HomePage> {
                           style: const TextStyle(color: Colors.white),
                         )),
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                              Radius.circular(14),
-                            ))),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Attendencepage()));
-                            },
-                            child: const Text('Get your attendance')),
-                      )
                     ],
                   ),
                 ),
               ),
             ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.co_present_outlined),
+            label: "Profile",
+          ),
+          // BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.cube), label: "Shipments"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle_outlined),
+            label: "Attendence",
+          ),
+        ],
+        enableFeedback: true,
+        onTap: (value) {
+          if (value == 1) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomePage()));
+            // return;
+          }
+          if (value == 2) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Attendencepage()));
+
+            // return;
+          }
+          // setState(() {
+          // _selectedIndex = value;
+          // });
+        },
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 }
