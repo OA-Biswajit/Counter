@@ -193,22 +193,25 @@ class _AttendencepageState extends State<Attendencepage> {
             label: "Attendence",
           ),
         ],
-        enableFeedback: true,
+
+        // enableFeedback: true,
+
         onTap: (value) {
-          if (value == 1) {
+          int _selectedIndex = 0;
+          if (value == 0) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => HomePage()));
             // return;
           }
-          if (value == 2) {
+          if (value == 1) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Attendencepage()));
 
             // return;
           }
-          // setState(() {
-          //   // _selectedIndex = value;
-          // });
+          setState(() {
+            _selectedIndex = value;
+          });
         },
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
