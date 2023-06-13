@@ -184,13 +184,12 @@ class _AttendencepageState extends State<Attendencepage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.co_present_outlined),
-            label: "Profile",
-          ),
-          // BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.cube), label: "Shipments"),
-          BottomNavigationBarItem(
             icon: Icon(Icons.check_circle_outlined),
             label: "Attendence",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.co_present_outlined),
+            label: "Profile",
           ),
         ],
 
@@ -200,13 +199,13 @@ class _AttendencepageState extends State<Attendencepage> {
           int _selectedIndex = 0;
           if (value == 0) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomePage()));
+                MaterialPageRoute(builder: (context) => Attendencepage()));
+
             // return;
           }
           if (value == 1) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Attendencepage()));
-
+                MaterialPageRoute(builder: (context) => HomePage()));
             // return;
           }
           setState(() {

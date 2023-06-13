@@ -261,33 +261,28 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
-        
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.co_present_outlined),
-            label: "Profile",
-          ),
-          // BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.cube), label: "Shipments"),
           BottomNavigationBarItem(
             icon: Icon(Icons.check_circle_outlined),
             label: "Attendence",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.co_present_outlined),
+            label: "Profile",
+          ),
         ],
-        
+
         // enableFeedback: true,
-       
-        onTap: (value) { 
-          int _selectedIndex=0;
+
+        onTap: (value) {
+          int _selectedIndex = 0;
           if (value == 0) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomePage()));
-            // return;
+                MaterialPageRoute(builder: (context) => Attendencepage()));
           }
           if (value == 1) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Attendencepage()));
-
-            // return;
+                MaterialPageRoute(builder: (context) => HomePage()));
           }
           setState(() {
             _selectedIndex = value;
